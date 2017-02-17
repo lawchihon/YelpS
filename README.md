@@ -14,10 +14,10 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Search results page
-   - [ ] Infinite scroll for restaurant results.
-   - [ ] Implement map view of restaurant results.
+- [X] Search results page
+- [X] Infinite scroll for restaurant results.
 - [ ] Implement the restaurant detail page.
+- [ ] Implement map view of restaurant results.
 
 The following **additional** features are implemented:
 

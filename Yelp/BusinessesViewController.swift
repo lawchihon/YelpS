@@ -8,11 +8,13 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UISearchBarDelegate {
+class BusinessesViewController: UIViewController, UISearchBarDelegate, UIScrollViewDelegate {
     
     var businesses: [Business]!    
     @IBOutlet weak var tableView: UITableView!
     var searchBar: UISearchBar!
+    var offset = 0
+    var loading = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,7 @@ class BusinessesViewController: UIViewController, UISearchBarDelegate {
         // you just need to set the titleView to be the search bar
         navigationItem.titleView = searchBar
 
-        Business.searchWithTerm(term: "Thai", completion: { (businesses: [Business]?, error: Error?) -> Void in
+        Business.searchWithTerm(term: "", completion: { (businesses: [Business]?, error: Error?) -> Void in
             
             self.businesses = businesses
             self.tableView.reloadData()
@@ -83,6 +85,30 @@ class BusinessesViewController: UIViewController, UISearchBarDelegate {
             self.tableView.reloadData()            
         })
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (!self.loading) {
+            let scrollViewContentHeight = tableView.contentSize.height
+            let scrollOffsetThreshold = scrollViewContentHeight - tableView.bounds.size.height
+            
+            if(scrollView.contentOffset.y > scrollOffsetThreshold && tableView.isDragging) {
+                self.loading = true
+                print ("more")
+                
+                // ... Code to load more results ...
+                offset = self.businesses.count
+                Business.searchWithTerm(term: searchBar.text!, offset: offset, completion: { (businesses: [Business]?, error: Error?) -> Void in
+                    self.loading = false
+                    if let businesses = businesses {
+                        self.businesses.append(contentsOf: businesses)
+                        self.tableView.reloadData()
+                    }
+                })
+            }
+        }
+
+    }
+
 }
 
 extension BusinessesViewController: UITableViewDelegate, UITableViewDataSource {
