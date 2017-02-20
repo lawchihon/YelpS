@@ -109,6 +109,14 @@ class BusinessesViewController: UIViewController, UISearchBarDelegate, UIScrollV
 
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailViewController = segue.destination as? BusinessViewController {
+            let cell = sender as! BusinessCell
+            let indexPath = tableView.indexPath(for: cell)
+            let business = businesses![(indexPath?.row)!]
+            detailViewController.business = business
+        }
+    }
 }
 
 extension BusinessesViewController: UITableViewDelegate, UITableViewDataSource {
