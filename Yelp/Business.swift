@@ -16,6 +16,9 @@ class Business: NSObject {
     let distance: String?
     let ratingImageURL: URL?
     let reviewCount: NSNumber?
+    let is_closed: Bool?
+    let latitude: NSNumber?
+    let longitude: NSNumber?
     
     init(dictionary: NSDictionary) {
         name = dictionary["name"] as? String
@@ -42,6 +45,15 @@ class Business: NSObject {
                 }
                 address += neighborhoods![0] as! String
             }
+            
+            let coordinate = location!["coordinate"] as? NSDictionary
+            self.latitude = coordinate!["latitude"] as? NSNumber
+            self.longitude = coordinate!["longitude"] as? NSNumber
+
+        }
+        else {
+            self.latitude = -1
+            self.longitude = -1
         }
         self.address = address
         
@@ -73,6 +85,9 @@ class Business: NSObject {
         }
         
         reviewCount = dictionary["review_count"] as? NSNumber
+        
+        self.is_closed = dictionary["is_closed"] as? Bool
+        
     }
     
     class func businesses(array: [NSDictionary]) -> [Business] {

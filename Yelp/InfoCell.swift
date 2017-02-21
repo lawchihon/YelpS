@@ -16,7 +16,7 @@ class InfoCell: UITableViewCell {
     @IBOutlet weak var categoriesLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var hoursLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var closeLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

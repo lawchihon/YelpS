@@ -24,7 +24,7 @@ class BusinessesViewController: UIViewController, UISearchBarDelegate, UIScrollV
         searchBar = UISearchBar()
         searchBar.delegate = self
         searchBar.sizeToFit()
-        
+
         // the UIViewController comes with a navigationItem property
         // this will automatically be initialized for you if when the
         // view controller is added to a navigation controller's stack

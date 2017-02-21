@@ -11,7 +11,6 @@ import UIKit
 class DestinationCell: UITableViewCell {
 
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var neighborLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
